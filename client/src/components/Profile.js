@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from 'react';
-// import {toast} from 'react-toastify'
+import '../styles/Profile.css';
+import logo from '../assets/logo.png'; // Import your logo
 
 const Profile = () => {
-  const [user, setUser] = useState({});
   const [loading, setLoading] = useState(true);
   const [formData, setFormData] = useState({
     name: '',
@@ -22,20 +22,16 @@ const Profile = () => {
     })
       .then(response => response.json())
       .then(data => {
-        setUser(data);
         setFormData(data);
         setLoading(false);
       })
       .catch(error => {
-        // toast.error(error?.data?.message || error.error)
         console.error('Error fetching user profile:', error);
         setLoading(false);
       });
   }, []);
 
   const handleChange = event => {
-
-    event.preventDefault();
     setFormData({
       ...formData,
       [event.target.name]: event.target.value
@@ -48,109 +44,111 @@ const Profile = () => {
     const updatedFormData = {
       ...formData,
     };
-  
-    fetch('http://localhost:3000/profiles', {
-  method: 'POST',
-  headers: {
-    'Content-Type': 'application/json',
-  },
-  body: JSON.stringify(updatedFormData),
-})
-  .then(response => {
-    if (response.ok) {
-      return response.json();
-    } else {
-      throw new Error('Failed to create profile');
-    }
-  })
-  .then(data => {
-    setUser(data);
-    setFormData(data)
-    console.log(data);
-    window.alert('Profile Created Successfully');
-  })
-  .catch(error => {
-    console.error('Error creating user profile:', error);
-    window.alert('Create failed. One of the fields was invalid. Please try again');
-  });
 
+    fetch('http://localhost:3000/profiles', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(updatedFormData),
+    })
+      .then(response => {
+        if (response.ok) {
+          return response.json();
+        } else {
+          throw new Error('Failed to create profile');
+        }
+      })
+      .then(data => {
+        setFormData(data);
+        console.log(data);
+        window.alert('Profile Created Successfully');
+      })
+      .catch(error => {
+        console.error('Error creating user profile:', error);
+        window.alert('Create failed. One of the fields was invalid. Please try again');
+      });
   };
-  
+
   if (loading) {
     return <div>Loading...</div>;
   }
 
   return (
-    <div className="container" expand='lg' collapseOnSelect >
-      <h1 className='text-center'>Profile</h1>
-      <form onSubmit={handleSubmit}>
-        <div className="mb-3">
-          <label htmlFor="name" className="form-label">Name:</label>
+    <div className="profile-container">
+      <header>
+        <img src={logo} alt="Logo" className="logo" />
+      </header>
+      <form onSubmit={handleSubmit} className="profile-form">
+        <h1>Profile</h1>
+        {/* Your form inputs */}
+        <div className="form-input-group">
+          <label htmlFor="name">Name:</label>
           <input
             type="text"
             id="name"
-            className="form-control"
             name="name"
             value={formData.name}
             onChange={handleChange}
+            required
           />
         </div>
-        <div className="mb-3">
-          <label htmlFor="email" className="form-label">Email:</label>
+        <div className="form-input-group">
+          <label htmlFor="email">Email:</label>
           <input
             type="email"
             id="email"
-            className="form-control"
             name="email"
             value={formData.email}
             onChange={handleChange}
+            required
           />
         </div>
-        <div className="mb-3">
-          <label htmlFor="bio" className="form-label">Bio:</label>
+        <div className="form-input-group">
+          <label htmlFor="bio">Bio:</label>
           <input
             type="text"
             id="bio"
-            className="form-control"
             name="bio"
             value={formData.bio}
             onChange={handleChange}
+            required
           />
         </div>
-        <div className="mb-3">
-          <label htmlFor="location" className="form-label">Address:</label>
+        <div className="form-input-group">
+          <label htmlFor="address">Address:</label>
           <input
             type="text"
             id="address"
-            className="form-control"
             name="address"
             value={formData.address}
             onChange={handleChange}
+            required
           />
         </div>
-        <div className="mb-3">
-          <label htmlFor="image" className="form-label">Avatar:</label>
+        <div className="form-input-group">
+          <label htmlFor="image">Avatar:</label>
           <input
             type="text"
             id="image"
-            className="form-control"
             name="image"
             value={formData.image}
             onChange={handleChange}
+            required
           />
         </div>
-        <div className="mb-3">
-          <label htmlFor="contacts" className="form-label">contacts:</label>
+        <div className="form-input-group">
+          <label htmlFor="contacts">Contacts:</label>
           <input
             type="number"
             id="contacts"
-            className="form-control"
             name="contacts"
             value={formData.contacts}
             onChange={handleChange}
+            required
           />
         </div>
-        <button type="submit" className="btn btn-primary">Create Profile</button>
+        <button type="submit">Create Profile</button>
       </form>
     </div>
   );
