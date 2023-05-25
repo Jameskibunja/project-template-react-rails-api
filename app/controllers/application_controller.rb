@@ -6,6 +6,18 @@ def encode_token(payload)
   JWT.encode(payload,"secret")
 end
 
+def decode_token
+  if auth_header = request.headers['Authorization']
+    token = auth_header.split(' ')[1]
+    begin
+      JWT.decode(token, 'secret', true, algorith: 'HS256')
+    rescue JWT::DecodeError
+      nil
+    end
+  end
+
+end
+
   private
 
   def set_current_user
