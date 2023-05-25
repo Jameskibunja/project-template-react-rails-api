@@ -4,7 +4,7 @@ class BooksController < ApplicationController
 
   # GET /books
   def index
-    @books = Book.all
+    @book = @user.books.all
     render json: @books
   end
 
@@ -15,9 +15,9 @@ class BooksController < ApplicationController
 
   # POST /books
   def create
-    @book = Book.new(book_params)
+    @book = Book.new(book_params.merge(user: @user))
     if @book.save
-      render json: @book, status: :created
+      render json: @book, status: :created, location: @book
     else
       render json: @book.errors, status: :unprocessable_entity
     end
@@ -51,7 +51,7 @@ end
   private
 
   def set_book
-    @book = Book.find(params[:id])
+    @book = @user.books.find(params[:id])
   end
 
   def book_params
