@@ -2,6 +2,10 @@ class ApplicationController < ActionController::API
   include ActionController::Cookies
   before_action :set_current_user
 
+def encode_token(payload)
+  JWT.encode(payload,"secret")
+end
+
   private
 
   def set_current_user
