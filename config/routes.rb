@@ -8,4 +8,5 @@ Rails.application.routes.draw do
   get '/transactions/:id/confirm', to: 'transactions#confirm', as: 'confirm_transaction'
   #route for users
   resource :users, only: [:create]
+  post 'login', to: 'users#login'
 end
