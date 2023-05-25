@@ -6,4 +6,6 @@ Rails.application.routes.draw do
   post '/transactions', to: 'transactions#create'
   get '/transactions/new', to: 'transactions#new'
   get '/transactions/:id/confirm', to: 'transactions#confirm', as: 'confirm_transaction'
+  #route for users
+  resource :users ,only:[create]
 end
