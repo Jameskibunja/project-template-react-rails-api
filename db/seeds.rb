@@ -1,13 +1,17 @@
+require 'faker'
+
 # Clear existing data
 Book.destroy_all
 User.destroy_all
+Transaction.destroy_all
 
 # Create a user
-user = User.create!(
+user = User.find_or_create_by!(
   username: 'john',
-  email: 'john@gmail.com',
-  password: 'password'
-)
+  email: 'john@gmail.com'
+) do |user|
+  user.password = 'password'
+end
 
 books = [
   {
@@ -48,5 +52,15 @@ books = [
 ]
 
 books.each do |book|
-  Book.create!(book.merge(user: user))
+  book_record = Book.find_or_create_by!(book.merge(user: user))
+
+  # Create transactions for the book
+  rand(1..10).times do
+    Transaction.create!(
+      user: User.order(Arel.sql('RANDOM()')).first,  # Pick a random user
+      book: book_record,
+      amount: book_record.price,
+      transaction_id: Faker::Alphanumeric.alphanumeric(number: 10, min_alpha: 3, min_numeric: 3)
+    )
+  end
 end

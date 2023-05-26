@@ -42,7 +42,7 @@ const Library = () => {
 
   const handlePurchase = (bookId, bookPrice) => {
     axios
-      .post('/transactions', {
+      .post('http://localhost:3000/transactions', {
         book_id: bookId,
         transaction: {
           amount: bookPrice * 100,
@@ -55,6 +55,7 @@ const Library = () => {
       .then(response => {
         const confirmationCode = response.data.confirmationCode;
         console.log('Transaction confirmed with code:', confirmationCode);
+        alert("Thank you for purchasing this book. Please wait as we process your payment.");
       })
       .catch(error => {
         console.log('Transaction failed:', error);

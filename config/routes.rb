@@ -10,7 +10,7 @@ Rails.application.routes.draw do
 
   get '/users', to: 'users#index'
 
-
+  get '/profiles/:id', to: 'profiles#show'
   # Routes for users
   resources :users, only: [:create]
   post '/login', to: 'users#login'

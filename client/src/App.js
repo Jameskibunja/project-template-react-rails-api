@@ -13,7 +13,7 @@ function App() {
   return (
     <Router>
       <div className="App">
-        <NavBar /> {/* Include the NavBar component */}
+        <NavBar />
         <Routes>
           <Route path="/" element={<Login />} />
           <Route path="/library" element={<Library />} />

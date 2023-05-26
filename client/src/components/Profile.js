@@ -1,8 +1,10 @@
 import React, { useState, useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
 import '../styles/Profile.css';
-import logo from '../assets/logo.png'; // Import your logo
+import logo from '../assets/logo.png';
 
 const Profile = () => {
+  const navigate = useNavigate();
   const [loading, setLoading] = useState(true);
   const [formData, setFormData] = useState({
     name: '',
@@ -63,6 +65,7 @@ const Profile = () => {
         setFormData(data);
         console.log(data);
         window.alert('Profile Created Successfully');
+        navigate(`/profile/${data.id}`);
       })
       .catch(error => {
         console.error('Error creating user profile:', error);
