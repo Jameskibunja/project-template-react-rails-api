@@ -6,7 +6,7 @@ import logo from '../assets/logo.png';
 
 class Login extends Component {
     state = {
-        username: '',
+        name: '',
         password: '',
         loginErrors: ''
     };
@@ -19,13 +19,13 @@ class Login extends Component {
 
     handleSubmit = (event) => {
         event.preventDefault();
-        const { username, password } = this.state;
+        const { name, password } = this.state;
         axios
             .post(
-                "/login", // replace with your API endpoint
+                "/users", // replace with your API endpoint
                 {
                     user: {
-                        username: username,
+                        username: name,
                         password: password
                     }
                 },
