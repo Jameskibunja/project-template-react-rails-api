@@ -22,7 +22,7 @@ class Login extends Component {
         const { username, password } = this.state;
         axios
             .post(
-                'API_URL', // replace with your API endpoint
+                "/login", // replace with your API endpoint
                 {
                     user: {
                         username: username,
