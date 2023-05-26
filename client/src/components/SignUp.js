@@ -1,14 +1,12 @@
 import React, { useState } from 'react';
 import axios from 'axios';
-import libraryImage from '../assets/library.jpg'; // your background image
-import logo from '../assets/logo.png';
-import { Link } from 'react-router-dom'; // import Link from react-router-dom
-import '../styles/Login.css';
+import { Link } from 'react-router-dom';
 
-function Login({ setIsLoggedIn }) {
+function SignUp({ setIsLoggedIn }) {
   const [username, setUsername] = useState('');
+  const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
-  const [loginErrors, setLoginErrors] = useState('');
+  const [signUpErrors, setSignUpErrors] = useState('');
 
   const handleChange = (event) => {
     const { name, value } = event.target;
@@ -16,6 +14,8 @@ function Login({ setIsLoggedIn }) {
       setUsername(value);
     } else if (name === 'password') {
       setPassword(value);
+    } else if (name === 'email') {
+      setEmail(value);
     }
   };
 
@@ -23,40 +23,44 @@ function Login({ setIsLoggedIn }) {
     event.preventDefault();
     axios
       .post(
-        'http://localhost:3000/login',
+        'http://localhost:3000/users',
         {
           username: username,
+          email: email,
           password: password
         },
         { withCredentials: true }
       )
       .then((response) => {
         if (response.data.jwt) {
-          localStorage.setItem('token', response.data.jwt);
+          localStorage.setItem('token', response.data.jwt)
           setIsLoggedIn(true);
         } else {
-          setLoginErrors('Invalid username or password');
+          setSignUpErrors('Failed to create account');
         }
       })
       .catch((error) => {
-        console.log('login error', error);
+        console.log('sign up error', error);
       });
   };
 
   return (
-    <div
-      className="login-container"
-      style={{ backgroundImage: `url(${libraryImage})` }}
-    >
-      <header>
-        <img src={logo} alt="Logo" className="logo" />
-      </header>
-      <form onSubmit={handleSubmit} className="login-form">
+    <div>
+      <h2>Sign Up</h2>
+      <form onSubmit={handleSubmit}>
         <input
           type="text"
           name="username"
           placeholder="Username"
           value={username}
+          onChange={handleChange}
+          required
+        />
+        <input
+          type="email"
+          name="email"
+          placeholder="Email"
+          value={email}
           onChange={handleChange}
           required
         />
@@ -68,16 +72,12 @@ function Login({ setIsLoggedIn }) {
           onChange={handleChange}
           required
         />
-        <button type="submit" className="login-button">
-          Login
-        </button>
-        {loginErrors && <p className="error-message">{loginErrors}</p>}
-        <Link to="/profile" className="login-button">
-          Sign up
-        </Link> {/* Use the same class as the login button */}
+        <button type="submit">Sign Up</button>
+        {signUpErrors && <p>{signUpErrors}</p>}
       </form>
+      <Link to="/login">Already have an account? Log in</Link>
     </div>
   );
 }
 
-export default Login;
+export default SignUp;

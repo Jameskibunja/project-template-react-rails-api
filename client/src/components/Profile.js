@@ -15,11 +15,23 @@ const Profile = () => {
     contacts: ''
   });
 
+  const fetchLoggedInUser = () => {
+    const token = localStorage.getItem('token');
+    if (token && token !== "null") {
+      return token;
+    }
+    else {
+      // redirect to login component
+      // Add the redirection logic here
+    }
+  };
+
   useEffect(() => {
     fetch('http://localhost:3000/profiles', {
       method: 'GET',
       headers: {
-        'Content-Type': 'application/json'
+        'Content-Type': 'application/json',
+        Authorization: `Bearer ${fetchLoggedInUser()}`
       }
     })
       .then(response => response.json())
@@ -51,6 +63,7 @@ const Profile = () => {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
+        Authorization: `Bearer ${fetchLoggedInUser()}`
       },
       body: JSON.stringify(updatedFormData),
     })

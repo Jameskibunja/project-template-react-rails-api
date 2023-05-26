@@ -12,6 +12,7 @@ Rails.application.routes.draw do
 
   get '/profiles/:id', to: 'profiles#show'
   # Routes for users
-  resources :users, only: [:create]
   post '/login', to: 'users#login'
+  resources :users, only: [:create]
+  
 end

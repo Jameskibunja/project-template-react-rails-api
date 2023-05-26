@@ -1,6 +1,5 @@
 class BooksController < ApplicationController
   before_action :set_book, only: [:show, :update, :destroy]
-  skip_before_action :authorize, only: [:upload] # Skip authorization for the 'upload' action
 
   # GET /books
   def index
@@ -25,16 +24,16 @@ class BooksController < ApplicationController
 
   # POST /books/upload
   def upload
-    @book = Book.new(book_params)
+    @user = logged_in_user
+    @book = @user.books.new(book_params)
     @book.image.attach(params[:book][:image]) if params[:book][:image]
-  
+
     if @book.save
       render json: @book, status: :created
     else
       render json: @book.errors, status: :unprocessable_entity
     end
   end
-  
 
   # PATCH/PUT /books/:id
   def update
@@ -57,6 +56,6 @@ class BooksController < ApplicationController
   end
 
   def book_params
-    params.require(:book).permit(:title, :author, :description, :image_url)
+    params.require(:book).permit(:title, :author, :description, :image)
   end
 end

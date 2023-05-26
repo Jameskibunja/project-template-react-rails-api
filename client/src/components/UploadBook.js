@@ -3,28 +3,38 @@ import axios from 'axios';
 import '../styles/UploadBook.css';
 import logo from '../assets/logo.png';
 
+const fetchLoggedInUser = () => {
+  const token = localStorage.getItem('token');
+  if (token && token !== "null") {
+    return token;
+  }
+  else {
+    // redirect to login component
+    // Add the redirection logic here
+  }
+};
+
 const UploadBook = () => {
   const [title, setTitle] = useState('');
   const [author, setAuthor] = useState('');
   const [description, setDescription] = useState('');
-  const [image, setImage] = useState(null);
+  const [imageUrl, setImageUrl] = useState('');
 
   const handleSubmit = (e) => {
     e.preventDefault();
 
-    const token = localStorage.getItem('token');
-
-    const formData = new FormData();
-    formData.append('book[title]', title);
-    formData.append('book[author]', author);
-    formData.append('book[description]', description);
-    formData.append('book[image]', image);
+    const book = {
+      title: title,
+      author: author,
+      description: description,
+      image: imageUrl,
+    };
 
     axios
-      .post('http://localhost:3000/books/upload', formData, {
+      .post('http://localhost:3000/books/upload', book, {
         headers: {
-          'Content-Type': 'multipart/form-data',
-          Authorization: `Bearer ${token}`,
+          'Content-Type': 'application/json',
+          Authorization: `Bearer ${fetchLoggedInUser()}`
         },
       })
       .then((response) => {
@@ -61,7 +71,13 @@ const UploadBook = () => {
           onChange={(e) => setDescription(e.target.value)}
           required
         />
-        <input type="file" onChange={(e) => setImage(e.target.files[0])} required />
+        <input
+          type="url"
+          placeholder="Image URL"
+          value={imageUrl}
+          onChange={(e) => setImageUrl(e.target.value)}
+          required
+        />
         <button type="submit">Upload</button>
       </form>
     </div>
