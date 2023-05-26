@@ -3,11 +3,15 @@ Rails.application.routes.draw do
   resources :books, only: [:index, :show, :create, :update, :destroy] do
     post 'upload', on: :collection
   end
-  resources :transactions, only: [:new, :create, :index] # Add 'index' action
+  resources :transactions, only: [:new, :create, :index]
   post '/transactions', to: 'transactions#create'
   get '/transactions/new', to: 'transactions#new'
   get '/transactions/:id/confirm', to: 'transactions#confirm', as: 'confirm_transaction'
-  #route for users
-  resource :users, only: [:create]
-  post 'login', to: 'users#login'
+
+  get '/users', to: 'users#index'
+
+
+  # Routes for users
+  resources :users, only: [:create]
+  post '/login', to: 'users#login'
 end

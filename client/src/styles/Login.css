@@ -41,4 +41,22 @@
     max-width: 100%;
   }
   
+  .login-form button.signup-button {
+    padding: 10px;
+    border: none;
+    border-radius: 5px;
+    background-color: #007BFF;
+    color: white;
+    cursor: pointer;
+    font-weight: bold;
+    transition: background-color 0.3s;
+  }
+  
+  .login-form button.signup-button:hover {
+    background-color: #0056b3;
+  }
+  
+  .login-form button.signup-button:focus {
+    outline: none;
+  }
   

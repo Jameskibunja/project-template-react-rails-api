@@ -1,10 +1,10 @@
 class BooksController < ApplicationController
-  before_action :authorize
   before_action :set_book, only: [:show, :update, :destroy]
+  skip_before_action :authorize, only: [:upload] # Skip authorization for the 'upload' action
 
   # GET /books
   def index
-    @books = @user.books.all
+    @books = Book.all
     render json: @books
   end
 
@@ -15,23 +15,25 @@ class BooksController < ApplicationController
 
   # POST /books
   def create
-    @book = Book.new(book_params.merge(user: @user))
+    @book = Book.new(book_params)
     if @book.save
-      render json: @book, status: :created, location: @book
+      render json: @book, status: :created
     else
       render json: @book.errors, status: :unprocessable_entity
     end
   end
 
   # POST /books/upload
-def upload
-  @book = current_user.books.build(book_params)
-  if @book.save
+  def upload
+    @book = Book.new(book_params)
+    @book.image.attach(params[:book][:image]) if params[:book][:image]
+  
+    if @book.save
       render json: @book, status: :created
-  else
+    else
       render json: @book.errors, status: :unprocessable_entity
+    end
   end
-end
   
 
   # PATCH/PUT /books/:id
@@ -51,11 +53,10 @@ end
   private
 
   def set_book
-    @book = @user.books.find(params[:id])
+    @book = Book.find(params[:id])
   end
 
   def book_params
     params.require(:book).permit(:title, :author, :description, :image_url)
   end
-  
 end

@@ -10,8 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2023_05_25_051231) do
-ActiveRecord::Schema.define(version: 2023_05_25_054119) do
+ActiveRecord::Schema.define(version: 2023_05_26_092515) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -24,20 +23,9 @@ ActiveRecord::Schema.define(version: 2023_05_25_054119) do
     t.string "description"
     t.decimal "price"
     t.string "image_url"
-    t.bigint "user_id", null: false
+    t.bigint "user_id"
+    t.binary "image"
     t.index ["user_id"], name: "index_books_on_user_id"
-  end
-
-  create_table "profiles", force: :cascade do |t|
-    t.string "name"
-    t.string "email"
-    t.text "bio"
-    t.string "image"
-    t.string "contacts"
-    t.string "address"
-    t.integer "user_id"
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
   end
 
   create_table "profiles", force: :cascade do |t|
@@ -69,6 +57,7 @@ ActiveRecord::Schema.define(version: 2023_05_25_054119) do
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.string "password_digest"
+    t.string "username"
   end
 
   add_foreign_key "books", "users"
