@@ -1,76 +1,116 @@
-import React, { useState, useEffect } from 'react';
-import axios from 'axios';
+import React, { useState, useEffect, useCallback } from 'react';
 import Book from './Book';
 import logo from '../assets/logo.png';
 import '../styles/Library.css';
+import api from '../services/api';
 
 const Library = () => {
-    const [books, setBooks] = useState([]);
-    const [page, setPage] = useState(1);
-    const [username, setUsername] = useState('');
+  const [books, setBooks] = useState([]);
+  const [page, setPage] = useState(1);
+  const [username, setUsername] = useState('');
 
-    useEffect(() => {
-        const storedUsername = localStorage.getItem('username');
-        setUsername(storedUsername);
-        getBooks(page);
-    }, [page]);
+  const fetchLoggedInUser = () => {
+    const token = localStorage.getItem('token');
+    if (token && token !== "null") {
+      return token;
+    } else {
+      // redirect to login component
+      // Add the redirection logic here
+    }
+  };
 
-    const getBooks = (page) => {
-        axios
-            .get(`/books?page=${page}`)
-            .then(response => {
-                setBooks(response.data);
-            })
-            .catch(error => {
-                console.log('book fetch error', error);
-            });
-    };
+  const getBooks = useCallback((page) => {
+    api
+      .get(`http://localhost:3000/books`, {
+        headers: {
+          Accept: 'application/json',
+          Authorization: `Bearer ${fetchLoggedInUser()}`
+        },
+      })
+      .then((response) => {
+        setBooks(response.data);
+      })
+      .catch((error) => {
+        console.log('book fetch error', error);
+      });
+  }, []);
 
-    const handleNextPage = () => {
-        setPage(prevPage => prevPage + 1);
-    };
+  useEffect(() => {
+    const storedUsername = localStorage.getItem('username');
+    setUsername(storedUsername);
+    getBooks(page);
+  }, [page, getBooks]);
 
-    const handlePreviousPage = () => {
-        if (page > 1) {
-            setPage(prevPage => prevPage - 1);
+  const handleNextPage = () => {
+    setPage((prevPage) => prevPage + 1);
+  };
+
+  const handlePreviousPage = () => {
+    if (page > 1) {
+      setPage((prevPage) => prevPage - 1);
+    }
+  };
+
+  const handlePurchase = (bookId, bookPrice) => {
+    api
+      .post(
+        'http://localhost:3000/transactions',
+        {
+          book_id: bookId,
+          transaction: {
+            amount: bookPrice * 100,
+          },
+        },
+        {
+          headers: {
+            'Content-Type': 'application/json',
+            Authorization: `Bearer ${fetchLoggedInUser()}`
+          },
         }
-    };
+      )
+      .then((response) => {
+        const confirmationCode = response.data.confirmationCode;
+        console.log('Transaction confirmed with code:', confirmationCode);
+        alert('Thank you for purchasing this book. Please wait as we process your payment.');
+      })
+      .catch((error) => {
+        console.log('Transaction failed:', error);
+      });
+  };
 
-    const handlePurchase = (bookId, bookPrice) => {
-        axios
-            .post('/transactions', {
-                book_id: bookId,  // book_id not nested under transaction
-                transaction: {
-                    amount: bookPrice * 100,  // amount nested under transaction
-                },
-            })
-            .then(response => {
-                const confirmationCode = response.data.confirmationCode;
-                console.log('Transaction confirmed with code:', confirmationCode);
-            })
-            .catch(error => {
-                console.log('Transaction failed:', error);
-            });
-    };
-    
+  // Function to truncate the description to a specified word limit
+  const truncateDescription = (text, limit) => {
+    const words = text.split(' ');
+    if (words.length > limit) {
+      return words.slice(0, limit).join(' ') + '...';
+    }
+    return text;
+  };
 
-    return (
-        <div className="library-container">
-            <header>
-                <img src={logo} alt="Logo" className="logo" />
-                <div className="user-details">{username}</div>
-            </header>
-            <div className="books-grid">
-                {books.map(book => (
-                    <Book key={book.id} book={book} onPurchase={() => handlePurchase(book.id, book.price)} />
-                ))}
-            </div>
-            <div className="pagination-buttons">
-                <button onClick={handlePreviousPage} disabled={page === 1}>Previous</button>
-                <button onClick={handleNextPage}>Next</button>
-            </div>
-        </div>
-    );
+  return (
+    <div className="library-container">
+      <header>
+        <img src={logo} alt="Logo" className="logo" />
+        <div className="user-details">{username}</div>
+      </header>
+      <div className="books-grid">
+        {books.map((book) => (
+          <Book
+            key={book.id}
+            book={book}
+            onPurchase={() => handlePurchase(book.id, book.price)}
+            truncatedDescription={truncateDescription(book.description, 13)}
+          />
+        ))}
+      </div>
+      <div className="pagination-buttons">
+        <button onClick={handlePreviousPage} disabled={page === 1}>
+          Previous
+        </button>
+        <button onClick={handleNextPage}>Next</button>
+      </div>
+    </div>
+  );
 };
 
 export default Library;

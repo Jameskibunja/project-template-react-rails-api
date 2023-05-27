@@ -1,36 +1,37 @@
 class ApplicationController < ActionController::API
-  include ActionController::Cookies
-  before_action :set_current_user
+  before_action :authorized
 
   def encode_token(payload)
-    JWT.encode(payload,"secret")
+    JWT.encode(payload, 'your_secret') # replace 'your_secret' with your secret key
   end
 
-  def decode_token
-    if auth_header = request.headers['Authorization']
+  def auth_header
+    request.headers['Authorization']
+  end
+
+  def decoded_token
+    if auth_header
       token = auth_header.split(' ')[1]
       begin
-        JWT.decode(token, 'secret', true, algorith: 'HS256')
+        JWT.decode(token, 'your_secret', true, algorithm: 'HS256')
       rescue JWT::DecodeError
         nil
       end
     end
   end
 
-  def authorized_user
-    decoded_token =decode_token()
+  def logged_in_user
     if decoded_token
       user_id = decoded_token[0]['user_id']
-      @user = User.find_by(id: user_id)
+      @user = User.find_by_id(user_id)
     end
   end
 
-  def authorize
-    render json: { message:"You have to log in"}, status: :unauthorized unless authorized_user
+  def logged_in?
+    !!logged_in_user
   end
-  private
 
-  def set_current_user
-    @current_user = User.find_by(id: session[:user_id]) if session[:user_id]
+  def authorized
+    render json: { message: 'Please log in' }, status: :unauthorized unless logged_in?
   end
 end

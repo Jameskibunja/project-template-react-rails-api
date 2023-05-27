@@ -10,4 +10,9 @@
     "deploy": "cp -a client/build/. public/",
     "heroku-postbuild": "npm run clean && npm run build && npm run deploy"
   }
+
+  {
+    "plugins": ["@babel/plugin-proposal-private-property-in-object"]
+  }
+  
 }

@@ -1,8 +1,10 @@
 import React, { useState, useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
 import '../styles/Profile.css';
-import logo from '../assets/logo.png'; // Import your logo
+import logo from '../assets/logo.png';
 
 const Profile = () => {
+  const navigate = useNavigate();
   const [loading, setLoading] = useState(true);
   const [formData, setFormData] = useState({
     name: '',
@@ -13,11 +15,23 @@ const Profile = () => {
     contacts: ''
   });
 
+  const fetchLoggedInUser = () => {
+    const token = localStorage.getItem('token');
+    if (token && token !== "null") {
+      return token;
+    }
+    else {
+      // redirect to login component
+      // Add the redirection logic here
+    }
+  };
+
   useEffect(() => {
     fetch('http://localhost:3000/profiles', {
       method: 'GET',
       headers: {
-        'Content-Type': 'application/json'
+        'Content-Type': 'application/json',
+        Authorization: `Bearer ${fetchLoggedInUser()}`
       }
     })
       .then(response => response.json())
@@ -49,6 +63,7 @@ const Profile = () => {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
+        Authorization: `Bearer ${fetchLoggedInUser()}`
       },
       body: JSON.stringify(updatedFormData),
     })
@@ -63,6 +78,7 @@ const Profile = () => {
         setFormData(data);
         console.log(data);
         window.alert('Profile Created Successfully');
+        navigate(`/profile/${data.id}`);
       })
       .catch(error => {
         console.error('Error creating user profile:', error);
