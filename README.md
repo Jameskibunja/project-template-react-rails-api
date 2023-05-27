@@ -2,6 +2,8 @@
 
 <p>BookPulse is a comprehensive book viewing and trading application that provides users with an easy-to-use platform for exploring and managing their book interests. It allows users to view a wide array of books, manage their viewed books, upload their own books, and engage in secure transactions for purchasing books.</p>
 
+![Homepage](client/homepage.png)
+
 <h2>Table of Contents</h2>
 
 <ul>
@@ -37,39 +39,16 @@
 
 <h2>Setup</h2>
 
-<ol>
-	<li>
-	<p>Clone the repository</p>
+1. Clone the repository
+    git clone <repository-url>
 
-	<p>bashCopy code</p>
-
-	<p><code>git clone &lt;repository-url&gt; </code></p>
-	</li>
-	<li>
-	<p>Change to the project&#39;s directory:</p>
-
-	<p>bashCopy code</p>
-
-	<p><code>cd BookPulse </code></p>
-	</li>
-	<li>
-	<p>Install the dependencies:</p>
-
-	<p>bashCopy code</p>
-
-	<p><code>npm install </code></p>
-	</li>
-	<li>
-	<p>Start the development server:</p>
-
-	<p>bashCopy code</p>
-
-	<p><code>npm start </code></p>
-	</li>
-	<li>
-	<p>Open your browser and navigate to <code>http://localhost:3000</code> to access the application.</p>
-	</li>
-</ol>
+2. Change to the project's directory:
+    cd BookPulse
+3. Install the dependencies:
+    npm install
+4. Start the development server:
+    npm start
+5. Open your browser and navigate to http://localhost:3000 to access the application.
 
 <h2>Usage</h2>
 
