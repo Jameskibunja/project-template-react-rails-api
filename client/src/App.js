@@ -6,13 +6,15 @@ import UploadBook from './components/UploadBook';
 import './App.css';
 import Profile from './components/Profile';
 import 'bootstrap/dist/css/bootstrap.min.css';
+import SignUp from './components/SignUp';
 
 function App() {
   return (
     <Router>
       <div className="App">
         <Routes>
-          <Route path="/" element={<Login />} />
+          <Route path="/" element={<SignUp />} />
+          <Route path="/login" element={<Login />} />
           <Route path="/library" element={<Library />} />
           <Route path="/library/:bookId" element={<Book />} />
           <Route path="/books/upload" element={<UploadBook />} />

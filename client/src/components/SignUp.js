@@ -1,10 +1,10 @@
 import React, { Component } from 'react';
 import axios from 'axios';
-import '../styles/Login.css';
+// import '../styles/SignUp.css';
 import libraryImage from '../assets/library.jpg'; // your background image
 import logo from '../assets/logo.png';
 
-class Login extends Component {
+class SignUp extends Component {
     state = {
         name: '',
         password: '',
@@ -22,7 +22,7 @@ class Login extends Component {
         const { name, password } = this.state;
         axios
             .post(
-                "/login", // replace with your API endpoint
+                "/users", // replace with your API endpoint
                 {
                     user: {
                         username: name,
@@ -37,22 +37,30 @@ class Login extends Component {
                 }
             })
             .catch(error => {
-                console.log('login error', error);
+                console.log('signup error', error);
             });
     };
 
     render() {
         return (
-            <div className="login-container" style={{backgroundImage: `url(${libraryImage})`}}>
+            <div className="signup-container" style={{backgroundImage: `url(${libraryImage})`}}>
                 <header>
                     <img src={logo} alt="Logo" className="logo" />
                 </header>
-                <form onSubmit={this.handleSubmit} className="login-form">
+                <form onSubmit={this.handleSubmit} className="signup-form">
                     <input
                         type="text"
                         name="username"
                         placeholder="Username"
                         value={this.state.username}
+                        onChange={this.handleChange}
+                        required
+                    />
+                    <input
+                        type="email"
+                        name="email"
+                        placeholder="Email"
+                        value={this.state.email}
                         onChange={this.handleChange}
                         required
                     />
@@ -64,11 +72,11 @@ class Login extends Component {
                         onChange={this.handleChange}
                         required
                     />
-                    <button type="submit">Login</button>
+                    <button type="submit">SignUp</button>
                 </form>
             </div>
         );
     }
 }
 
-export default Login;
+export default SignUp;
