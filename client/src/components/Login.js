@@ -52,10 +52,8 @@ function Login() {
       className="login-container"
       style={{ backgroundImage: `url(${libraryImage})` }}
     >
-      <header>
-        <img src={logo} alt="Logo" className="logo" />
-      </header>
       <form onSubmit={handleSubmit} className="login-form">
+        <img src={logo} alt="Logo" className="logo" />
         <input
           type="text"
           name="username"
