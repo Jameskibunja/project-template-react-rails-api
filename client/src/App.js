@@ -7,13 +7,11 @@ import Library from './components/Library';
 import Book from './components/Book';
 import UploadBook from './components/UploadBook';
 import Profile from './components/Profile';
-import { AuthProvider } from './AuthContext';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import './App.css';
 
 function App() {
   return (
-    <AuthProvider>
       <Router>
         <div className="App">
           <NavBar />
@@ -28,7 +26,6 @@ function App() {
           </Routes>
         </div>
       </Router>
-    </AuthProvider>
   );
 }
 

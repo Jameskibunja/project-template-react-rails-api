@@ -23,7 +23,7 @@ function SignUp({ setIsLoggedIn }) {
     event.preventDefault();
     axios
       .post(
-        'http://localhost:3000/users',
+        'https://arcane-eyrie-12883.herokuapp.com/users',
         {
           username: username,
           email: email,
