@@ -21,7 +21,6 @@ const Profile = () => {
       return token;
     }
     else {
-      // redirect to login component
       // Add the redirection logic here
     }
   };

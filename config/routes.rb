@@ -11,8 +11,9 @@ Rails.application.routes.draw do
   get '/users', to: 'users#index'
 
   get '/profiles/:id', to: 'profiles#show'
-  # Routes for users
+  patch '/profiles/:id', to: 'profiles#update' # Added update route for profiles
+  get '/profiles/:id/edit', to: 'profiles#edit', as: 'edit_profile'
+
   post '/login', to: 'users#login'
   resources :users, only: [:create]
-  
 end

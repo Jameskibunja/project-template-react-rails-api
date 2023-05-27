@@ -1,0 +1,47 @@
+.profile-details-container {
+    background-image: url('../assets/library.jpg');
+    background-size: cover;
+    background-repeat: no-repeat;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    color: black;
+    font-family: Arial, sans-serif;
+}
+
+.profile-details-form {
+    display: flex;
+    flex-direction: column;
+    width: 300px;
+    padding: 20px;
+    background-color: rgba(255, 255, 255, 0.8);
+    border-radius: 10px;
+}
+
+.profile-details-form input {
+    margin-bottom: 10px;
+    padding: 10px;
+    border: none;
+    border-radius: 5px;
+}
+
+.profile-details-form button {
+    padding: 10px;
+    border: none;
+    border-radius: 5px;
+    background-color: #007BFF;
+    color: white;
+    cursor: pointer;
+}
+
+.profile-details-form h1 {
+    text-align: center;
+    color: #000;
+}
+
+.profile-details-form p {
+    font-size: 16px;
+    color: #000;
+}
