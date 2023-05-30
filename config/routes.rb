@@ -16,4 +16,7 @@ Rails.application.routes.draw do
 
   post '/login', to: 'users#login'
   resources :users, only: [:create]
+
+  # Fallback route
+  get "*path", to: "fallback#index", constraints: ->(req) { !req.xhr? && req.format.html? }
 end
