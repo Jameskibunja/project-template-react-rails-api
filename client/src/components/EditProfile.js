@@ -26,7 +26,7 @@ const EditProfile = () => {
   };
 
   useEffect(() => {
-    fetch(`http://localhost:3000/profiles/${id}`, {
+    fetch(`https://afternoon-falls-80454.herokuapp.com/profiles/${id}`, {
       method: 'GET',
       headers: {
         'Content-Type': 'application/json',
@@ -61,7 +61,7 @@ const EditProfile = () => {
     };
 
     api
-      .post(`http://localhost:3000/profiles/${id}`, updatedProfile, {
+      .post(`https://afternoon-falls-80454.herokuapp.com/profiles/${id}`, updatedProfile, {
         headers: {
           'Content-Type': 'application/json',
           Authorization: `Bearer ${fetchLoggedInUser()}`

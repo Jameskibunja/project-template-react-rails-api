@@ -31,7 +31,7 @@ const UploadBook = () => {
     };
 
     axios
-      .post('http://localhost:3000/books/upload', book, {
+      .post('https://afternoon-falls-80454.herokuapp.com/books/upload', book, {
         headers: {
           'Content-Type': 'application/json',
           Authorization: `Bearer ${fetchLoggedInUser()}`

@@ -26,7 +26,7 @@ const Profile = () => {
   };
 
   useEffect(() => {
-    fetch('http://localhost:3000/profiles', {
+    fetch('https://afternoon-falls-80454.herokuapp.com/profiles', {
       method: 'GET',
       headers: {
         'Content-Type': 'application/json',
@@ -58,7 +58,7 @@ const Profile = () => {
       ...formData,
     };
 
-    fetch('http://localhost:3000/profiles', {
+    fetch('https://afternoon-falls-80454.herokuapp.com/profiles', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',

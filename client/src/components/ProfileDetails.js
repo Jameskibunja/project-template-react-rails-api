@@ -17,7 +17,7 @@ const ProfileDetails = () => {
   };
 
   useEffect(() => {
-    fetch(`http://localhost:3000/profiles/${id}`, {
+    fetch(`https://afternoon-falls-80454.herokuapp.com/profiles/${id}`, {
       method: 'GET',
       headers: {
         'Content-Type': 'application/json',
