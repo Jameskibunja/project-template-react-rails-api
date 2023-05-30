@@ -26,7 +26,7 @@ function Login() {
     event.preventDefault();
     axios
       .post(
-        'https://afternoon-falls-80454.herokuapp.com/login',
+        '/login',
         {
           username: username,
           password: password

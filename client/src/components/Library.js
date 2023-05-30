@@ -23,7 +23,7 @@ const Library = () => {
 
   const getBooks = useCallback((page) => {
     api
-      .get(`https://afternoon-falls-80454.herokuapp.com/books`, {
+      .get(`/books`, {
         headers: {
           Accept: 'application/json',
           Authorization: `Bearer ${fetchLoggedInUser()}`
@@ -56,7 +56,7 @@ const Library = () => {
   const handlePurchase = (bookId, bookPrice) => {
     api
       .post(
-        'https://afternoon-falls-80454.herokuapp.com/transactions',
+        '/transactions',
         {
           book_id: bookId,
           transaction: {

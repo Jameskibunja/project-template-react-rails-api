@@ -25,7 +25,7 @@ function SignUp({ setIsLoggedIn }) {
     event.preventDefault();
     axios
       .post(
-        'https://afternoon-falls-80454.herokuapp.com/users',
+        '/users',
         {
           username: username,
           email: email,

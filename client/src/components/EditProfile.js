@@ -61,7 +61,7 @@ const EditProfile = () => {
     };
 
     api
-      .post(`https://afternoon-falls-80454.herokuapp.com/profiles/${id}`, updatedProfile, {
+      .post(`/${id}`, updatedProfile, {
         headers: {
           'Content-Type': 'application/json',
           Authorization: `Bearer ${fetchLoggedInUser()}`

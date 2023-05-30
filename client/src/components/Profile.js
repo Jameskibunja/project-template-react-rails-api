@@ -58,7 +58,7 @@ const Profile = () => {
       ...formData,
     };
 
-    fetch('https://afternoon-falls-80454.herokuapp.com/profiles', {
+    fetch('/profiles', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
