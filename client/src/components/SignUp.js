@@ -21,30 +21,32 @@ function SignUp({ setIsLoggedIn }) {
     }
   };
 
-  const handleSubmit = (event) => {
+  const handleSubmit = async (event) => {
     event.preventDefault();
-    axios
-      .post(
+  
+    try {
+      const response = await axios.post(
         '/users',
         {
           username: username,
           email: email,
-          password: password
+          password: password,
         },
         { withCredentials: true }
-      )
-      .then((response) => {
-        if (response.data.jwt) {
-          localStorage.setItem('token', response.data.jwt);
-          setIsLoggedIn(true);
-        } else {
-          setSignUpErrors('Failed to create account');
-        }
-      })
-      .catch((error) => {
-        console.log('sign up error', error);
-      });
+      );
+  
+      if (response.data.jwt) {
+        localStorage.setItem('token', response.data.jwt);
+        setIsLoggedIn(true);
+      } else {
+        setSignUpErrors('Failed to create account');
+      }
+    } catch (error) {
+      console.log('sign up error', error);
+      // Handle the error appropriately, such as displaying an error message
+    }
   };
+  
 
   return (
     <div className="signup-container">
