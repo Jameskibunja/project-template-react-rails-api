@@ -11,7 +11,6 @@ class ProfilesController < ApplicationController
 
   def create
     profile = Profile.new(profile_params)
-    #profile.user = @current_user
 
     if profile.save
       render json: profile, status: :created
@@ -21,18 +20,18 @@ class ProfilesController < ApplicationController
   end
 
   def update
-    if @current_user.profile.update(profile_params)
-      render json: @current_user.profile, status: :ok
+    if @profile.update(profile_params)
+      render json: @profile, status: :ok
     else
-      render json: { errors: @current_user.profile.errors.full_messages }, status: :unprocessable_entity
+      render json: { errors: @profile.errors.full_messages }, status: :unprocessable_entity
     end
   end
 
   def destroy
-    if @current_user.profile.destroy
+    if @profile.destroy
       render json: { message: "Profile deleted successfully" }, status: :ok
     else
-      render json: { errors: @current_user.profile.errors.full_messages }, status: :unprocessable_entity
+      render json: { errors: @profile.errors.full_messages }, status: :unprocessable_entity
     end
   end
 
@@ -43,6 +42,6 @@ class ProfilesController < ApplicationController
   end
 
   def profile_params
-    params.permit(:name, :email, :bio, :address, :image, :contacts)
+    params.require(:profile).permit(:name, :email, :bio, :address, :image, :contacts)
   end
 end

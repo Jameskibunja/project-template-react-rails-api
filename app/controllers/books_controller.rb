@@ -27,6 +27,7 @@ class BooksController < ApplicationController
     @user = logged_in_user
     @book = @user.books.new(book_params)
     @book.image.attach(params[:book][:image]) if params[:book][:image]
+    @book.image_url = @book.image.url if @book.image.attached? # Set the image_url based on the uploaded image URL
 
     if @book.save
       render json: @book, status: :created

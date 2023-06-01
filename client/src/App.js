@@ -7,13 +7,12 @@ import Library from './components/Library';
 import Book from './components/Book';
 import UploadBook from './components/UploadBook';
 import Profile from './components/Profile';
-import { AuthProvider } from './AuthContext';
+import ProfileDetails from './components/ProfileDetails';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import './App.css';
 
 function App() {
   return (
-    <AuthProvider>
       <Router>
         <div className="App">
           <NavBar />
@@ -22,13 +21,13 @@ function App() {
             <Route path="/login" element={<Login />} />
             <Route path="/signup" element={<SignUp />} />
             <Route path="/library" element={<Library />} />
-            <Route path="/library/:bookId" element={<Book />} /> {/* Added route for individual book page */}
+            <Route path="/library/:bookId" element={<Book />} />
             <Route path="/books/upload" element={<UploadBook />} />
             <Route path="/profile" element={<Profile />} />
+            <Route path="/profile/:id" element={<ProfileDetails />} />
           </Routes>
         </div>
       </Router>
-    </AuthProvider>
   );
 }
 

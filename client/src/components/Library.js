@@ -1,4 +1,5 @@
 import React, { useState, useEffect, useCallback } from 'react';
+import { useNavigate } from 'react-router-dom';
 import Book from './Book';
 import logo from '../assets/logo.png';
 import '../styles/Library.css';
@@ -9,19 +10,20 @@ const Library = () => {
   const [page, setPage] = useState(1);
   const [username, setUsername] = useState('');
 
-  const fetchLoggedInUser = () => {
+  const navigate = useNavigate();
+
+  const fetchLoggedInUser = useCallback(() => {
     const token = localStorage.getItem('token');
     if (token && token !== "null") {
       return token;
     } else {
-      // redirect to login component
-      // Add the redirection logic here
+      navigate('/login');
     }
-  };
+  }, [navigate]);
 
   const getBooks = useCallback((page) => {
     api
-      .get(`http://localhost:3000/books`, {
+      .get(`/books`, {
         headers: {
           Accept: 'application/json',
           Authorization: `Bearer ${fetchLoggedInUser()}`
@@ -33,7 +35,7 @@ const Library = () => {
       .catch((error) => {
         console.log('book fetch error', error);
       });
-  }, []);
+  }, [fetchLoggedInUser]);
 
   useEffect(() => {
     const storedUsername = localStorage.getItem('username');
@@ -54,7 +56,7 @@ const Library = () => {
   const handlePurchase = (bookId, bookPrice) => {
     api
       .post(
-        'http://localhost:3000/transactions',
+        '/transactions',
         {
           book_id: bookId,
           transaction: {
@@ -78,7 +80,6 @@ const Library = () => {
       });
   };
 
-  // Function to truncate the description to a specified word limit
   const truncateDescription = (text, limit) => {
     const words = text.split(' ');
     if (words.length > limit) {

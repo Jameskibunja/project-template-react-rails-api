@@ -1,14 +1,17 @@
 import React, { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
-import libraryImage from '../assets/library.jpg'; // your background image
+import libraryImage from '../assets/library.jpg';
 import logo from '../assets/logo.png';
-import { Link } from 'react-router-dom'; // import Link from react-router-dom
+import { Link } from 'react-router-dom';
 import '../styles/Login.css';
 
-function Login({ setIsLoggedIn }) {
+function Login() {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
   const [loginErrors, setLoginErrors] = useState('');
+
+  const navigate = useNavigate();
 
   const handleChange = (event) => {
     const { name, value } = event.target;
@@ -23,7 +26,7 @@ function Login({ setIsLoggedIn }) {
     event.preventDefault();
     axios
       .post(
-        'http://localhost:3000/login',
+        '/login',
         {
           username: username,
           password: password
@@ -33,7 +36,8 @@ function Login({ setIsLoggedIn }) {
       .then((response) => {
         if (response.data.jwt) {
           localStorage.setItem('token', response.data.jwt);
-          setIsLoggedIn(true);
+          localStorage.setItem('username', username);
+          navigate("/library");
         } else {
           setLoginErrors('Invalid username or password');
         }
@@ -48,10 +52,8 @@ function Login({ setIsLoggedIn }) {
       className="login-container"
       style={{ backgroundImage: `url(${libraryImage})` }}
     >
-      <header>
-        <img src={logo} alt="Logo" className="logo" />
-      </header>
       <form onSubmit={handleSubmit} className="login-form">
+        <img src={logo} alt="Logo" className="logo" />
         <input
           type="text"
           name="username"
@@ -72,9 +74,9 @@ function Login({ setIsLoggedIn }) {
           Login
         </button>
         {loginErrors && <p className="error-message">{loginErrors}</p>}
-        <Link to="/profile" className="login-button">
+        <Link to="/signup" className="login-button">
           Sign up
-        </Link> {/* Use the same class as the login button */}
+        </Link>
       </form>
     </div>
   );

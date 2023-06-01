@@ -1,0 +1,256 @@
+[33mcommit 7a482ffe4930017bcde6c5afb9e96dcc85a5c39c[m[33m ([m[1;36mHEAD -> [m[1;32mauthentication[m[33m, [m[1;31morigin/authentication[m[33m)[m
+Merge: d72ae08 8ca420e
+Author: jacinta mwangi <jacinta.mwangi@student@moringaschool.com>
+Date:   Sat May 27 05:19:38 2023 +0300
+
+    Merge remote-tracking branch 'origin/main' into authentication
+
+[33mcommit d72ae08cfbbbc8e3508e9d57b5a786fcf67cde92[m
+Author: jacinta mwangi <jacinta.mwangi@student@moringaschool.com>
+Date:   Sat May 27 05:10:01 2023 +0300
+
+    changes
+
+[33mcommit 8ca420e750402aa91c288611c7b29c6ae11c0dca[m[33m ([m[1;31morigin/main[m[33m, [m[1;31morigin/HEAD[m[33m)[m
+Author: JAMES <jameskibunja17@gmail.com>
+Date:   Fri May 26 21:35:08 2023 +0300
+
+    User Login & Authentication
+
+[33mcommit 0d7155ce58d2c4d93c27f7facc13a563e537d41c[m
+Author: jacinta mwangi <jacinta.mwangi@student@moringaschool.com>
+Date:   Fri May 26 14:23:32 2023 +0300
+
+    mino changes
+
+[33mcommit f46d0dd61b9a90dfeca428aadd544af226be3ea4[m
+Author: JAMES <jameskibunja17@gmail.com>
+Date:   Fri May 26 13:14:01 2023 +0300
+
+    Minor changes on Transaction
+
+[33mcommit cac0b0247c850aace58e59e9ebaa5e1f8c9c8428[m
+Author: jacinta mwangi <jacinta.mwangi@student@moringaschool.com>
+Date:   Fri May 26 12:41:09 2023 +0300
+
+    changes
+
+[33mcommit 36424a1c4e25130708a40ef7bb3d754599d65c32[m
+Author: JAMES <jameskibunja17@gmail.com>
+Date:   Fri May 26 12:33:43 2023 +0300
+
+    Added NavBar
+
+[33mcommit e4c44b92f80a633ed0d1c26ea9ab596957eaa93a[m
+Author: jacinta mwangi <jacinta.mwangi@student@moringaschool.com>
+Date:   Fri May 26 09:17:58 2023 +0300
+
+    added pending migration
+
+[33mcommit b3814b03e934a278acd35a1dad8f958e599640b7[m
+Author: jacinta mwangi <jacinta.mwangi@student@moringaschool.com>
+Date:   Fri May 26 08:48:41 2023 +0300
+
+    merged
+
+[33mcommit e88baf1bc002ec1d255a9a05e3c027e05250392d[m
+Merge: 2ec58cb 5865462
+Author: Jameskibunja <78150978+Jameskibunja@users.noreply.github.com>
+Date:   Thu May 25 19:35:51 2023 +0300
+
+    Merge pull request #2 from Jameskibunja/authentication
+    
+    Authentication
+
+[33mcommit 5865462f8fcb347018d97bd40a335841cdf9ac34[m
+Merge: b4983a4 2ec58cb
+Author: jacinta mwangi <jacinta.mwangi@student@moringaschool.com>
+Date:   Thu May 25 19:23:17 2023 +0300
+
+    Merge remote-tracking branch 'origin/main' into authentication
+
+[33mcommit b4983a4e95e732114f5d3a60a79b977dc226cc9f[m
+Author: jacinta mwangi <jacinta.mwangi@student@moringaschool.com>
+Date:   Thu May 25 12:54:34 2023 +0300
+
+    book CRUD operations for a specific user
+
+[33mcommit d07676890b563611129d0a6d07f44380a3c766a7[m
+Author: jacinta mwangi <jacinta.mwangi@student@moringaschool.com>
+Date:   Thu May 25 12:50:02 2023 +0300
+
+    book CRUD operations for a specific user
+
+[33mcommit 2ec58cb2acbd541660080f9641cfb12a866c19de[m
+Author: JAMES <jameskibunja17@gmail.com>
+Date:   Thu May 25 11:21:39 2023 +0300
+
+    Minor Changes on Profile feature
+
+[33mcommit 3ec9a4207ad5431a26f76509eca8f22c53644d91[m
+Author: jacinta mwangi <jacinta.mwangi@student@moringaschool.com>
+Date:   Thu May 25 10:59:56 2023 +0300
+
+    authorized each action
+
+[33mcommit d8a54e46d6812b36419f14f79b67503c758071c8[m
+Merge: a4f879b d63853e
+Author: Jameskibunja <78150978+Jameskibunja@users.noreply.github.com>
+Date:   Thu May 25 10:55:31 2023 +0300
+
+    Merge pull request #1 from Jameskibunja/profile_management
+    
+    Profile management
+
+[33mcommit d63853ed3e6883b111fc9505ecbcde347204b9f6[m[33m ([m[1;31morigin/profile_management[m[33m)[m
+Author: IvyW2 <ivywambugha2@gmail.com>
+Date:   Thu May 25 10:08:59 2023 +0300
+
+    debugging
+
+[33mcommit 577fa32fec04f24a5784e869fd2cc8d798683844[m
+Author: IvyW2 <ivywambugha2@gmail.com>
+Date:   Thu May 25 09:09:57 2023 +0300
+
+    adding changes to profile.js
+
+[33mcommit 84300f8542a6f399826db2a0bc5afeeedb516b84[m
+Author: IvyW2 <ivywambugha2@gmail.com>
+Date:   Thu May 25 09:05:32 2023 +0300
+
+    adding profile.js
+
+[33mcommit ba1a1e78c01c3604e291d0fe3d947bd0012ff370[m
+Author: IvyW2 <ivywambugha2@gmail.com>
+Date:   Thu May 25 09:03:49 2023 +0300
+
+    adding components
+
+[33mcommit a27402d0c1d83238dac926e17b480d460d475eb9[m
+Author: IvyW2 <ivywambugha2@gmail.com>
+Date:   Thu May 25 08:59:27 2023 +0300
+
+    adding migrations/schema
+
+[33mcommit 6ca2b881224bc2797148bc756c72d4a892a5a553[m
+Author: IvyW2 <ivywambugha2@gmail.com>
+Date:   Thu May 25 08:50:34 2023 +0300
+
+    adding profile controllers
+
+[33mcommit 59e21aed323055f3f28908295b78747ab96bfe69[m
+Author: IvyW2 <ivywambugha2@gmail.com>
+Date:   Thu May 25 08:47:09 2023 +0300
+
+    first commit
+
+[33mcommit 15564673239767635ba34d54fc611ab4f108d92c[m
+Author: jacinta mwangi <jacinta.mwangi@student@moringaschool.com>
+Date:   Thu May 25 08:29:30 2023 +0300
+
+    add book association to user
+
+[33mcommit 1a427d3aea716e6ec8424b2123f1f98b806d7a83[m
+Author: jacinta mwangi <jacinta.mwangi@student@moringaschool.com>
+Date:   Thu May 25 08:25:23 2023 +0300
+
+    resolved an error
+
+[33mcommit 8f05700f06ccf6a6638d07a2aa50955f61f26389[m
+Author: jacinta mwangi <jacinta.mwangi@student@moringaschool.com>
+Date:   Thu May 25 08:14:15 2023 +0300
+
+    created book references to user
+
+[33mcommit c361ca4bca782b35bfe04f16c5999fc02de42495[m
+Author: jacinta mwangi <jacinta.mwangi@student@moringaschool.com>
+Date:   Thu May 25 08:08:30 2023 +0300
+
+    added authorize method
+
+[33mcommit 089bb2c2a5730c781edc3f0ccbfc1584c51b70b5[m
+Author: jacinta mwangi <jacinta.mwangi@student@moringaschool.com>
+Date:   Thu May 25 08:00:10 2023 +0300
+
+    added authorize method
+
+[33mcommit aef5096e80744bd87ae96a5a5497a703ab0c63d9[m
+Author: jacinta mwangi <jacinta.mwangi@student@moringaschool.com>
+Date:   Thu May 25 07:57:21 2023 +0300
+
+    added authorize method
+
+[33mcommit 139e9cb5a41c6b62090b9f65749d3f86d39dd4b2[m
+Author: jacinta mwangi <jacinta.mwangi@student@moringaschool.com>
+Date:   Thu May 25 07:51:10 2023 +0300
+
+    added authorize user method to app/controller
+
+[33mcommit 64262b46cba1b3b94819fe608735744e495712b0[m
+Author: jacinta mwangi <jacinta.mwangi@student@moringaschool.com>
+Date:   Thu May 25 07:44:23 2023 +0300
+
+    add decode token method in app/ctrl
+
+[33mcommit 64d66adc868fd0660d414e3a6a9406a6585789d7[m
+Author: jacinta mwangi <jacinta.mwangi@student@moringaschool.com>
+Date:   Thu May 25 07:18:37 2023 +0300
+
+    updated user controller and routes
+
+[33mcommit 070f1644786aea3d8c2b1ba0d1dce10c7dbd3eec[m
+Author: jacinta mwangi <jacinta.mwangi@student@moringaschool.com>
+Date:   Thu May 25 06:46:06 2023 +0300
+
+    added route to post user
+
+[33mcommit dad6ed14ba2078557e26c9fdf798b02662e2deef[m
+Author: jacinta mwangi <jacinta.mwangi@student@moringaschool.com>
+Date:   Thu May 25 06:07:56 2023 +0300
+
+    added route to register a user
+
+[33mcommit b94ab434506570d324e512a9f730ef10fdfce218[m
+Author: jacinta mwangi <jacinta.mwangi@student@moringaschool.com>
+Date:   Thu May 25 06:06:23 2023 +0300
+
+    created action to register a user
+
+[33mcommit 6cc31612043faf0b11ba08f05af6eca67ccec0fb[m
+Author: jacinta mwangi <jacinta.mwangi@student@moringaschool.com>
+Date:   Thu May 25 05:54:04 2023 +0300
+
+    added a users controller
+
+[33mcommit 53156296ddb93f55eac5f0717d3c39fed5d2ea98[m
+Author: jacinta mwangi <jacinta.mwangi@student@moringaschool.com>
+Date:   Thu May 25 05:46:41 2023 +0300
+
+    added the encode token to app/ctrl
+
+[33mcommit e36dbc17a972c3ac6843ce34c4b6d09b747d7d6d[m
+Author: jacinta mwangi <jacinta.mwangi@student@moringaschool.com>
+Date:   Thu May 25 05:43:17 2023 +0300
+
+    did migration
+
+[33mcommit 89faf02fe84de3f1b0bf046c7167329e953480ef[m
+Author: jacinta mwangi <jacinta.mwangi@student@moringaschool.com>
+Date:   Wed May 24 22:28:20 2023 +0300
+
+    Added password digest to users
+
+[33mcommit e58f49b42c902a148113203cf09c3d06760b60c4[m
+Author: jacinta mwangi <jacinta.mwangi@student@moringaschool.com>
+Date:   Wed May 24 22:15:10 2023 +0300
+
+    updated ruby version to 2.7.6
+
+[33mcommit b3a02cd2fb7c10fa62f4dff6a3c735473efd8640[m
+Author: jacinta mwangi <jacinta.mwangi@student@moringaschool.com>
+Date:   Wed May 24 21:44:52 2023 +0300
+
+    updated ruby version to 2.6.7
+
+[33mcommit bcf92fa6555d5ccc452592b26268458b38390618[m
+Author: jacinta mwangi <jacinta
