@@ -26,7 +26,7 @@ const EditProfile = () => {
   };
 
   useEffect(() => {
-    fetch(`https://afternoon-falls-80454.herokuapp.com/profiles/${id}`, {
+    fetch(`/profiles/${id}`, {
       method: 'GET',
       headers: {
         'Content-Type': 'application/json',
