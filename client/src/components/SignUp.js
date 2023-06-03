@@ -24,30 +24,12 @@ function SignUp({ setIsLoggedIn }) {
   const handleSubmit = async (event) => {
     event.preventDefault();
   
-    try {
-      const response = await axios.post(
-        '/users',
-        {
-          username: username,
-          email: email,
-          password: password,
-        },
-        { withCredentials: true }
-      );
-  
-      if (response.data.jwt) {
-        localStorage.setItem('token', response.data.jwt);
-        setIsLoggedIn(true);
-      } else {
-        setSignUpErrors('Failed to create account');
-      }
-    } catch (error) {
-      console.log('sign up error', error);
-      // Handle the error appropriately, such as displaying an error message
+    axios.post('/users', { user: { username, email, password } },
+     { headers: { 'Content-Type': 'application/json' },
+      withCredentials: true }) .then(response => console.log(response.data)) 
+      .catch(error => console.error(error)); 
     }
-  };
   
-
   return (
     <div className="signup-container">
       <header>
@@ -90,6 +72,6 @@ function SignUp({ setIsLoggedIn }) {
       </div>
     </div>
   );
-}
+};
 
 export default SignUp;
