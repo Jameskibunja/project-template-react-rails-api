@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import axios from 'axios';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import logo from '../assets/logo.png';
 import '../styles/SignUp.css';
 
@@ -8,7 +8,8 @@ function SignUp({ setIsLoggedIn }) {
   const [username, setUsername] = useState('');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
-  const [signUpErrors, setSignUpErrors] = useState('');
+  const [confirmationMessage, setConfirmationMessage] = useState('');
+  const navigate = useNavigate();
 
   const handleChange = (event) => {
     const { name, value } = event.target;
@@ -23,13 +24,30 @@ function SignUp({ setIsLoggedIn }) {
 
   const handleSubmit = async (event) => {
     event.preventDefault();
-  
-    axios.post('/users', { user: { username, email, password } },
-     { headers: { 'Content-Type': 'application/json' },
-      withCredentials: true }) .then(response => console.log(response.data)) 
-      .catch(error => console.error(error)); 
-    }
-  
+
+    axios
+      .post(
+        '/users',
+        { user: { username, email, password } },
+        {
+          headers: { 'Content-Type': 'application/json' },
+          withCredentials: true
+        }
+      )
+      .then(response => {
+        console.log(response.data);
+        setConfirmationMessage('Confirmed! You\'re in! Please login');
+        setUsername('');
+        setEmail('');
+        setPassword('');
+        setTimeout(() => {
+          setConfirmationMessage('');
+          navigate('/login');
+        }, 3000);
+      })
+      .catch(error => console.error(error));
+  };
+
   return (
     <div className="signup-container">
       <header>
@@ -64,7 +82,9 @@ function SignUp({ setIsLoggedIn }) {
           <button type="submit" className="signup-button">
             Sign Up
           </button>
-          {signUpErrors && <p className="error-message">{signUpErrors}</p>}
+          {confirmationMessage && (
+            <p className="confirmation-message">{confirmationMessage}</p>
+          )}
           <Link to="/login" className="login-link">
             Already have an account? Log in
           </Link>
@@ -72,6 +92,6 @@ function SignUp({ setIsLoggedIn }) {
       </div>
     </div>
   );
-};
+}
 
 export default SignUp;
