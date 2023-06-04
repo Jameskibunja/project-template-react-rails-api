@@ -24,7 +24,7 @@ const Library = () => {
   useEffect(() => {
     const getBooks = () => {
       api
-        .get('/books', {
+        .get('https://afternoon-falls-80454.herokuapp.com/books', {
           params: {
             page: page,
             limit: 6,
