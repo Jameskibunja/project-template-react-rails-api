@@ -78,7 +78,7 @@ const Profile = () => {
         setFormData(data);
         console.log(data);
         window.alert('Profile Created Successfully');
-        navigate(`https://afternoon-falls-80454.herokuapp.com/profile/${data.id}`); // Redirect to profile details page
+        navigate(`/profile/${data.id}`); 
       })
       .catch(error => {
         console.error('Error creating user profile:', error);
