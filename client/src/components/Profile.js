@@ -78,7 +78,7 @@ const Profile = () => {
         setFormData(data);
         console.log(data);
         window.alert('Profile Created Successfully');
-        navigate(`/profile/${data.id}`); 
+        navigate(`/profile/${data.id}`); // Redirect to profile details page
       })
       .catch(error => {
         console.error('Error creating user profile:', error);
