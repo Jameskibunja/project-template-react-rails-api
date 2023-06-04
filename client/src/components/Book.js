@@ -4,6 +4,11 @@ import '../styles/Books.css';
 
 const Book = ({ book, onPurchase }) => {
   const navigate = useNavigate();
+
+  if (!book) {
+    return null; 
+  }
+
   const { title, author, image_url, description, price } = book;
 
   // Split the description into an array of words

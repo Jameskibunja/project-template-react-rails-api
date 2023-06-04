@@ -15,22 +15,22 @@ const Profile = () => {
     contacts: ''
   });
 
-  const fetchLoggedInUser = () => {
-    const token = localStorage.getItem('token');
-    if (token && token !== "null") {
-      return token;
-    }
-    else {
-      // Add the redirection logic here
-    }
-  };
-
   useEffect(() => {
+    const token = localStorage.getItem('token');
+    if (!token || token === "null") {
+      navigate('/login');
+    } else {
+      fetchProfile();
+    }
+  }, [navigate]);
+
+  const fetchProfile = () => {
+    const token = localStorage.getItem('token');
     fetch('https://afternoon-falls-80454.herokuapp.com/profiles', {
       method: 'GET',
       headers: {
         'Content-Type': 'application/json',
-        Authorization: `Bearer ${fetchLoggedInUser()}`
+        Authorization: `Bearer ${token}`
       }
     })
       .then(response => response.json())
@@ -42,7 +42,7 @@ const Profile = () => {
         console.error('Error fetching user profile:', error);
         setLoading(false);
       });
-  }, []);
+  };
 
   const handleChange = event => {
     setFormData({
@@ -58,11 +58,12 @@ const Profile = () => {
       ...formData,
     };
 
-    fetch('/profiles', {
+    const token = localStorage.getItem('token');
+    fetch('https://afternoon-falls-80454.herokuapp.com/profiles', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
-        Authorization: `Bearer ${fetchLoggedInUser()}`
+        Authorization: `Bearer ${token}`
       },
       body: JSON.stringify(updatedFormData),
     })
@@ -77,7 +78,7 @@ const Profile = () => {
         setFormData(data);
         console.log(data);
         window.alert('Profile Created Successfully');
-        navigate(`/profile/${data.id}`);
+        navigate(`https://afternoon-falls-80454.herokuapp.com/profile/${data.id}`);
       })
       .catch(error => {
         console.error('Error creating user profile:', error);

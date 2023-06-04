@@ -1,39 +1,47 @@
 import React, { useState, useEffect } from 'react';
-import { useParams, Link } from 'react-router-dom';
+import { useParams, Link, useNavigate } from 'react-router-dom';
 import '../styles/ProfileDetails.css';
 
 const ProfileDetails = () => {
   const { id } = useParams();
   const [loading, setLoading] = useState(true);
   const [profile, setProfile] = useState(null);
-
-  const fetchLoggedInUser = () => {
-    const token = localStorage.getItem('token');
-    if (token && token !== "null") {
-      return token;
-    } else {
-      // handle redirect to login or show an error message
-    }
-  };
+  const navigate = useNavigate();
 
   useEffect(() => {
-    fetch(`/${id}`, {
-      method: 'GET',
-      headers: {
-        'Content-Type': 'application/json',
-        Authorization: `Bearer ${fetchLoggedInUser()}`
+    const fetchProfile = () => {
+      const token = localStorage.getItem('token');
+      if (!token || token === 'null') {
+        navigate('/login');
+        return;
       }
-    })
-      .then(response => response.json())
-      .then(data => {
-        setProfile(data);
-        setLoading(false);
+
+      fetch(`https://afternoon-falls-80454.herokuapp.com/profiles/${id}`, {
+        method: 'GET',
+        headers: {
+          'Content-Type': 'application/json',
+          Authorization: `Bearer ${token}`,
+        },
       })
-      .catch(error => {
-        console.error('Error fetching profile details:', error);
-        setLoading(false);
-      });
-  }, [id]);
+        .then((response) => {
+          if (response.ok) {
+            return response.json();
+          } else {
+            throw new Error('Failed to fetch profile');
+          }
+        })
+        .then((data) => {
+          setProfile(data);
+          setLoading(false);
+        })
+        .catch((error) => {
+          console.error('Error fetching profile details:', error);
+          setLoading(false);
+        });
+    };
+
+    fetchProfile();
+  }, [id, navigate]);
 
   if (loading) {
     return <div>Loading...</div>;

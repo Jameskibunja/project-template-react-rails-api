@@ -8,6 +8,7 @@ import Book from './components/Book';
 import UploadBook from './components/UploadBook';
 import Profile from './components/Profile';
 import ProfileDetails from './components/ProfileDetails';
+import BookDetails from './components/Book'; // Import the Book component instead of BookDetails
 import 'bootstrap/dist/css/bootstrap.min.css';
 import './App.css';
 
@@ -25,6 +26,7 @@ function App() {
           <Route path="/books/upload" element={<UploadBook />} />
           <Route path="/profile" element={<Profile />} />
           <Route path="/profile/:id" element={<ProfileDetails />} />
+          <Route path="/books/:bookId" element={<BookDetails />} />
         </Routes>
       </div>
     </Router>
