@@ -18,34 +18,35 @@ const Library = () => {
       return token;
     } else {
       navigate('/login');
+      return null;
     }
   }, [navigate]);
 
-  useEffect(() => {
-    const getBooks = () => {
-      api
-        .get('https://afternoon-falls-80454.herokuapp.com/books', {
-          params: {
-            page: page,
-            limit: 6,
-          },
-          headers: {
-            Accept: 'application/json',
-            Authorization: `Bearer ${fetchLoggedInUser()}`,
-          },
-        })
-        .then((response) => {
-          setBooks(response.data);
-        })
-        .catch((error) => {
-          console.log('book fetch error', error);
-        });
-    };
+  const getBooks = useCallback((pageNumber) => {
+    api
+      .get('https://afternoon-falls-80454.herokuapp.com/books', {
+        params: {
+          page: pageNumber,
+          limit: 6,
+        },
+        headers: {
+          Accept: 'application/json',
+          Authorization: `Bearer ${fetchLoggedInUser()}`,
+        },
+      })
+      .then((response) => {
+        setBooks(response.data);
+      })
+      .catch((error) => {
+        console.log('book fetch error', error);
+      });
+  }, [fetchLoggedInUser]);
 
+  useEffect(() => {
     const storedUsername = localStorage.getItem('username');
     setUsername(storedUsername);
-    getBooks();
-  }, [page, fetchLoggedInUser]);
+    getBooks(page);
+  }, [page, getBooks]);
 
   const handleNextPage = () => {
     setPage((prevPage) => prevPage + 1);
