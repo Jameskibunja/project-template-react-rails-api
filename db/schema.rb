@@ -51,7 +51,7 @@ ActiveRecord::Schema.define(version: 2023_05_26_110046) do
     t.string "description"
     t.decimal "price"
     t.string "image_url"
-    t.bigint "user_id", null: false
+    t.bigint "user_id"
     t.binary "image"
     t.index ["user_id"], name: "index_books_on_user_id"
   end

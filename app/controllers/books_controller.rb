@@ -1,9 +1,15 @@
 class BooksController < ApplicationController
   before_action :set_book, only: [:show, :update, :destroy]
+  before_action :authorize_user, only: [:upload]
 
   # GET /books
   def index
-    @books = Book.all
+    page = params[:page].to_i || 1
+    limit = params[:limit].to_i || 6
+
+    offset = (page - 1) * limit
+
+    @books = Book.offset(offset).limit(limit)
     render json: @books
   end
 
@@ -24,10 +30,8 @@ class BooksController < ApplicationController
 
   # POST /books/upload
   def upload
-    @user = logged_in_user
-    @book = @user.books.new(book_params)
-    @book.image.attach(params[:book][:image]) if params[:book][:image]
-    @book.image_url = @book.image.url if @book.image.attached? # Set the image_url based on the uploaded image URL
+    @book = current_user.books.new(book_params)
+    @book.image_url = params[:book][:image_url] if params[:book][:image_url]
 
     if @book.save
       render json: @book, status: :created
@@ -57,6 +61,11 @@ class BooksController < ApplicationController
   end
 
   def book_params
-    params.require(:book).permit(:title, :author, :description, :image)
+    params.require(:book).permit(:title, :author, :description, :image_url)
+  end
+
+  def authorize_user
+    return if logged_in?
+    render json: { error: 'Unauthorized' }, status: :unauthorized
   end
 end

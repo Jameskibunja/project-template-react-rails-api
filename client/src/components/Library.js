@@ -14,34 +14,38 @@ const Library = () => {
 
   const fetchLoggedInUser = useCallback(() => {
     const token = localStorage.getItem('token');
-    if (token && token !== "null") {
+    if (token && token !== 'null') {
       return token;
     } else {
       navigate('/login');
     }
   }, [navigate]);
 
-  const getBooks = useCallback((page) => {
-    api
-      .get(`/books`, {
-        headers: {
-          Accept: 'application/json',
-          Authorization: `Bearer ${fetchLoggedInUser()}`
-        },
-      })
-      .then((response) => {
-        setBooks(response.data);
-      })
-      .catch((error) => {
-        console.log('book fetch error', error);
-      });
-  }, [fetchLoggedInUser]);
-
   useEffect(() => {
+    const getBooks = () => {
+      api
+        .get('/books', {
+          params: {
+            page: page,
+            limit: 6,
+          },
+          headers: {
+            Accept: 'application/json',
+            Authorization: `Bearer ${fetchLoggedInUser()}`,
+          },
+        })
+        .then((response) => {
+          setBooks(response.data);
+        })
+        .catch((error) => {
+          console.log('book fetch error', error);
+        });
+    };
+
     const storedUsername = localStorage.getItem('username');
     setUsername(storedUsername);
-    getBooks(page);
-  }, [page, getBooks]);
+    getBooks();
+  }, [page, fetchLoggedInUser]);
 
   const handleNextPage = () => {
     setPage((prevPage) => prevPage + 1);
@@ -66,7 +70,7 @@ const Library = () => {
         {
           headers: {
             'Content-Type': 'application/json',
-            Authorization: `Bearer ${fetchLoggedInUser()}`
+            Authorization: `Bearer ${fetchLoggedInUser()}`,
           },
         }
       )

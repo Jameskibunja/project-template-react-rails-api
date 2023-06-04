@@ -1,17 +1,12 @@
 import React, { useState } from 'react';
 import axios from 'axios';
+import { useNavigate } from 'react-router-dom';
 import '../styles/UploadBook.css';
 import logo from '../assets/logo.png';
 
 const fetchLoggedInUser = () => {
   const token = localStorage.getItem('token');
-  if (token && token !== "null") {
-    return token;
-  }
-  else {
-    // redirect to login component
-    // Add the redirection logic here
-  }
+  return token || '';
 };
 
 const UploadBook = () => {
@@ -19,6 +14,8 @@ const UploadBook = () => {
   const [author, setAuthor] = useState('');
   const [description, setDescription] = useState('');
   const [imageUrl, setImageUrl] = useState('');
+  const [uploadMessage, setUploadMessage] = useState('');
+  const navigate = useNavigate();
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -27,22 +24,33 @@ const UploadBook = () => {
       title: title,
       author: author,
       description: description,
-      image: imageUrl,
+      image_url: imageUrl,
     };
 
-    axios
-      .post('/upload', book, {
-        headers: {
-          'Content-Type': 'application/json',
-          Authorization: `Bearer ${fetchLoggedInUser()}`
-        },
-      })
-      .then((response) => {
-        console.log(response);
-      })
-      .catch((error) => {
-        console.log(error);
-      });
+    const token = fetchLoggedInUser();
+
+    if (token) {
+      axios
+        .post('/books/upload', book, {
+          headers: {
+            'Content-Type': 'application/json',
+            Authorization: `Bearer ${token}`,
+          },
+        })
+        .then((response) => {
+          console.log(response);
+          setUploadMessage('Book has been added to your library');
+          setTimeout(() => {
+            setUploadMessage('');
+            navigate('/library'); // Redirect to the library page
+          }, 3000);
+        })
+        .catch((error) => {
+          console.log(error);
+        });
+    } else {
+      navigate('/login');
+    }
   };
 
   return (
@@ -79,6 +87,7 @@ const UploadBook = () => {
           required
         />
         <button type="submit">Upload</button>
+        {uploadMessage && <p>{uploadMessage}</p>}
       </form>
     </div>
   );
