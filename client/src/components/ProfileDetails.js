@@ -61,7 +61,7 @@ const ProfileDetails = () => {
         <p>Address: {profile.address}</p>
         <p>Avatar: {profile.image}</p>
         <p>Contacts: {profile.contacts}</p>
-        <Link to={`https://afternoon-falls-80454.herokuapp.com/profile/${id}/edit`} className="edit-button">
+        <Link to={`/profile/${id}/edit`} className="edit-button">
           Edit
         </Link>
       </form>
