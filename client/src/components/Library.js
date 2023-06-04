@@ -61,7 +61,7 @@ const Library = () => {
   const handlePurchase = (bookId, bookPrice) => {
     api
       .post(
-        '/transactions',
+        'https://afternoon-falls-80454.herokuapp.com/transactions',
         {
           book_id: bookId,
           transaction: {
